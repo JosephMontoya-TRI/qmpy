@@ -1,6 +1,5 @@
 # Django settings for oqmd project.
-import os.path
-import os.environ
+import os
 INSTALL_PATH = os.path.dirname(os.path.abspath(__file__))
 INSTALL_PATH = os.path.split(INSTALL_PATH)[0]
 INSTALL_PATH = os.path.split(INSTALL_PATH)[0]
