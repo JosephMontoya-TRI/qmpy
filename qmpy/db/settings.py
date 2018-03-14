@@ -1,6 +1,6 @@
 # Django settings for oqmd project.
 import os.path
-import os.environ
+import os
 INSTALL_PATH = os.path.dirname(os.path.abspath(__file__))
 INSTALL_PATH = os.path.split(INSTALL_PATH)[0]
 INSTALL_PATH = os.path.split(INSTALL_PATH)[0]
@@ -19,11 +19,11 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('DATABASE_NAME', 'example_database'),
-        'USER': os.environ.get('DATABASE_USER', 'admin'),
-        'PASSWORD': os.environ.get('DATABASE_PASSWORD', ''),
-        'HOST': os.environ.get('DATABASE_HOST', ''),
-        'PORT': os.environ.get('DATABASE_PORT', ''),
+        'NAME': os.getenv('DATABASE_NAME', 'example_database'),
+        'USER': os.getenv('DATABASE_USER', 'admin'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD', ''),
+        'HOST': os.getenv('DATABASE_HOST', ''),
+        'PORT': os.getenv('DATABASE_PORT', ''),
     }
 }
 
