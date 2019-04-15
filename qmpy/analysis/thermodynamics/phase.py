@@ -419,6 +419,11 @@ class Phase(object):
                 return False
         return True
 
+    def __hash__(self):
+        # TODO: this is a hack to make phases hashable as they were previously
+        #       in python 2
+        return id(self)
+
     @property
     def label(self):
         return '%s: %0.3f eV/atom' % (self.name, self.energy)
