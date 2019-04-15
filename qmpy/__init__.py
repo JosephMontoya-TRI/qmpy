@@ -106,14 +106,6 @@ sys.path.insert(-1, INSTALL_PATH)
 if 'DJANGO_SETTINGS_MODULE' not in os.environ:
     os.environ['DJANGO_SETTINGS_MODULE'] = 'qmpy.db.settings'
 
-from .models import *
-from .analysis import *
-from .analysis.thermodynamics import *
-from .analysis.symmetry import *
-from .analysis.vasp import *
-from .computing import *
-from .data import *
-
 import yaml
 import os
 
