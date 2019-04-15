@@ -20,7 +20,7 @@ ndict = {1:'elements',
 
 def construct_flot(phase_dict):
     data = []
-    for p, v in phase_dict.items():
+    for p, v in list(phase_dict.items()):
         series = {'label':p.name, 'data':v}
         data.append(series)
     return json.dumps(data)
@@ -46,7 +46,7 @@ def composition_view(request, search=None):
 
     if composition:
         comp = Composition.get(composition)
-        ps = PhaseSpace('-'.join(comp.comp.keys()))
+        ps = PhaseSpace('-'.join(list(comp.comp.keys())))
         ps.infer_formation_energies()
         data['pd'] = ps.phase_diagram.get_flot_script("phasediagram")
         data['search'] = composition
@@ -62,7 +62,7 @@ def composition_view(request, search=None):
         else:
             data['singlephase'] = False
         #data['singlephase'] = ( len(gs) == 1 )
-        data['space'] = '-'.join(comp.comp.keys())
+        data['space'] = '-'.join(list(comp.comp.keys()))
         return render_to_response('materials/composition.html', 
                 data,
                 RequestContext(request))
@@ -82,10 +82,10 @@ def composition_view(request, search=None):
         results = defaultdict(list)
         for c in comps:
             results['-'.join(sorted(c.space))] += c.entries
-        for k,v in results.items():
+        for k,v in list(results.items()):
             results[k] = sorted(v, key=lambda x:
                     1000 if x.energy is None else x.energy)
-        results = sorted(results.items(), key=lambda x: -len(x[0].split('-')))
+        results = sorted(list(results.items()), key=lambda x: -len(x[0].split('-')))
         data['results'] = results
         return render_to_response('materials/phasespace.html', 
                 data,

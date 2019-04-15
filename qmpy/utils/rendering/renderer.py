@@ -2,12 +2,12 @@ import sys
 import logging
 import json
 
-from renderable import *
+from .renderable import *
 import qmpy
-import point
-import line
-import text
-import axis
+from . import point
+from . import line
+from . import text
+from . import axis
 from qmpy.utils import *
 
 logger = logging.getLogger(__name__)
@@ -95,7 +95,7 @@ class Renderer(object):
             fig = plt.figure()
             axes = fig.gca(projection='3d')
         else:
-            print "I don't know how to display a {d}-D image".format(d=self.dim)
+            print("I don't know how to display a {d}-D image".format(d=self.dim))
             raise RenderingError
                     
         for line in self.lines:

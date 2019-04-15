@@ -1,8 +1,8 @@
 import logging
 
-from renderable import *
+from .renderable import *
 import qmpy
-import point
+from . import point
 from mpl_toolkits.mplot3d import Axes3D
 
 logger = logging.getLogger(__name__)
@@ -52,7 +52,7 @@ class Text(Renderable):
             
         opts['position'] = 'absolute'
 
-        opts = ';'.join(['%s:%s' % (k, v) for k, v in opts.items() ])
+        opts = ';'.join(['%s:%s' % (k, v) for k, v in list(opts.items()) ])
         div = '<div style={options}>{string}</div>'
         div = div.format(string=self.text, options=opts)
 

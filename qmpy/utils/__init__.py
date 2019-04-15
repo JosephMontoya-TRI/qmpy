@@ -2,10 +2,10 @@
 
 import os, os.path
 
-from math import *
-from strings import *
-from rendering import *
-from daemon import Daemon
+from .math import *
+from .strings import *
+from .rendering import *
+from .daemon import Daemon
 
 def mkdir(path):
     """
@@ -45,7 +45,7 @@ def combinations_with_replacement(iterable, r):
     indices = [0] * r
     yield tuple(pool[i] for i in indices)
     while True:
-        for i in reversed(range(r)):
+        for i in reversed(list(range(r))):
             if indices[i] != n - 1:
                 break
         else:
@@ -70,12 +70,12 @@ def atom_sort(atoms):
 
 def get_docstring(model):
     names = model._meta.get_all_field_names()
-    longest = max(map(len, names))
+    longest = max(list(map(len, names)))
 
-    print "+-" + '-'*longest + '-+'
+    print("+-" + '-'*longest + '-+')
     for n in names:
-        print '| '+ n.ljust(longest) + ' |'
-        print "+-" + '-'*longest + '-+'
+        print('| '+ n.ljust(longest) + ' |')
+        print("+-" + '-'*longest + '-+')
 
 def get_field_list(model):
-    print ', '.join(model._meta.get_all_field_names())
+    print(', '.join(model._meta.get_all_field_names()))

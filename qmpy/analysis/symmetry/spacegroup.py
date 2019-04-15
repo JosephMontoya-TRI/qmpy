@@ -8,7 +8,7 @@ import logging
 from django.db import models
 
 import qmpy.utils as utils
-from routines import *
+from .routines import *
 
 logger = logging.getLogger(__name__)
 
@@ -67,7 +67,7 @@ class Translation(models.Model):
     @classmethod
     def get(cls, vector):
         fields = ['x', 'y', 'z']
-        arr_dict = dict(zip(fields, vector))
+        arr_dict = dict(list(zip(fields, vector)))
         obj, new = cls.objects.get_or_create(**arr_dict)
         if new:
             obj.save()
@@ -144,7 +144,7 @@ class Rotation(models.Model):
                    'a21', 'a22', 'a23',
                    'a31', 'a32', 'a33']
         matrix = np.ravel(matrix)
-        mat_dict = dict(zip(fields, matrix))
+        mat_dict = dict(list(zip(fields, matrix)))
         obj, new = cls.objects.get_or_create(**mat_dict)
         if new:
             obj.save()
@@ -205,7 +205,7 @@ class Operation(models.Model):
             >>> Operation.get(( rot, trans ))
 
         """
-        if isinstance(value, basestring):
+        if isinstance(value, str):
             rot, trans = parse_sitesym(value)
         elif isinstance(value, tuple):
             rot, trans = value

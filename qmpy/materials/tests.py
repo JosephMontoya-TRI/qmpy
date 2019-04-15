@@ -13,7 +13,7 @@ class ElementTestCase(TestCase):
         fe = Element.get('Fe')
         elements = open(INSTALL_PATH+'/data/elements/data.yml').read()
         elements = yaml.load(elements)
-        for k, v in elements.items():
+        for k, v in list(elements.items()):
             elt = Element.get(k)
             self.assertEqual(elt.z, v['z'])
             self.assertEqual(elt.symbol, v['symbol'])
@@ -173,7 +173,7 @@ class EntryTestCase(TestCase):
             self.entries[f] = Entry.create(tdir+'/'+f)
 
     def tearDown(self):
-        for d in self.dirs.values():
+        for d in list(self.dirs.values()):
             for f in os.listdir(d):
                 os.remove(d+'/'+f)
             os.removedirs(d)

@@ -101,7 +101,7 @@ def standard(entry, **kwargs):
         f.save()
         entry.calculations['standard'] = calc
         entry.structures['standard'] = calc.output
-        ps = PhaseSpace(calc.input.comp.keys())
+        ps = PhaseSpace(list(calc.input.comp.keys()))
         ps.compute_stabilities(save=True)
     return calc
 
@@ -343,7 +343,7 @@ def static(entry, xc_func='PBE', **kwargs):
         f = calc.get_formation() # LW 16 Jan 2016: Need to rewrite this to have
         # separate hulls for LDA / PBE / ...
         f.save()
-        ps = PhaseSpace(calc.input.comp.keys())
+        ps = PhaseSpace(list(calc.input.comp.keys()))
         ps.compute_stabilities(reevaluate=True, save=True)
     else:
         calc.write()

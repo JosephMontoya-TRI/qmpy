@@ -92,13 +92,13 @@ class Entry(models.Model):
                 self.reference = self.reference
         super(Entry, self).save(*args, **kwargs)
         if self._structures:
-            for k, v in self.structures.items():
+            for k, v in list(self.structures.items()):
                 v.label = k
                 v.entry = self
                 v.save()
             #self.structure_set = self.structures.values()
         if self._calculations:
-            for k, v in self.calculations.items():
+            for k, v in list(self.calculations.items()):
                 v.label = k
                 v.entry = self
                 v.save()
@@ -154,7 +154,7 @@ class Entry(models.Model):
         entry.input = structure
         entry.ntypes = structure.ntypes
         entry.natoms = len(structure.sites)
-        entry.elements = entry.comp.keys()
+        entry.elements = list(entry.comp.keys())
         entry.composition = Composition.get(structure.comp)
         for kw in keywords:
             entry.add_keyword(kw)
@@ -205,7 +205,7 @@ class Entry(models.Model):
     def elements(self):
         """List of Elements"""
         if self._elements is None:
-            self._elements = [ Element.get(e) for e in self.comp.keys() ]
+            self._elements = [ Element.get(e) for e in list(self.comp.keys()) ]
         return self._elements
 
     @elements.setter
@@ -217,7 +217,7 @@ class Entry(models.Model):
     def species(self):
         """List of Species"""
         if self._species is None:
-            self._species = [ Species.get(s) for s in self.spec_comp.keys() ]
+            self._species = [ Species.get(s) for s in list(self.spec_comp.keys()) ]
         return self._species
 
     @species.setter
@@ -254,7 +254,7 @@ class Entry(models.Model):
     def structures(self, structs):
         if not isinstance(structs, dict):
             raise TypeError('structures must be a dict')
-        if not all( isinstance(v, Structure) for v in structs.values()):
+        if not all( isinstance(v, Structure) for v in list(structs.values())):
             raise TypeError('structures must be a dict of Calculations')
         self._structures = structs
 
@@ -283,7 +283,7 @@ class Entry(models.Model):
     def calculations(self, calcs):
         if not isinstance(calcs, dict):
             raise TypeError('calculations must be a dict')
-        if not all( isinstance(v, vasp.Calculation) for v in calcs.values()):
+        if not all( isinstance(v, vasp.Calculation) for v in list(calcs.values())):
             raise TypeError('calculations must be a dict of Calculations')
         self._calculations = calcs
 
@@ -550,7 +550,7 @@ class Entry(models.Model):
         path = os.path.abspath(path)
         try:
             os.system('mv %s %s' % (self.path, path))
-        except Exception, err:
+        except Exception as err:
             logger.warn(err)
             return
         old_path = self.path
