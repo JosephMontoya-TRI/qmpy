@@ -2,7 +2,7 @@ import numpy as np
 
 import qmpy
 from qmpy.utils import *
-from . import symmetry.routines as routines
+from qmpy.analysis.symmetry import routines
 
 import logging
 
