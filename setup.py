@@ -14,7 +14,7 @@ setup(
     include_package_data=True,
     long_description=open('README.md').read(),
     install_requires=[
-        "Django",
+        # "Django",
         "PuLP",
         "numpy",
         "scipy",
