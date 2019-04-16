@@ -14,12 +14,11 @@ setup(
     include_package_data=True,
     long_description=open('README.md').read(),
     install_requires=[
-        # "Django",
+        "Django",
         "PuLP",
         "numpy",
         "scipy",
         "mysqlclient",
-        # "MySQL-python",
         "matplotlib",
         "networkx",
         "pytest",
@@ -27,12 +26,12 @@ setup(
         "ase",
         "django-extensions",
         "lxml",
-        "pyspglib == 1.8.3.1",
-        "PyCifRW >= 4.3",
+        "pyspglib==1.8.3.1",
+        "PyCifRW>=4.3",
         "pexpect",
         "pyparsing",
         "PyYAML",
         "scikit-learn",
-        "bokeh == 0.12.15"
+        "bokeh==0.12.15"
     ],
 )
