@@ -6,7 +6,7 @@ import numpy as np
 import ast
 import urllib.request, urllib.error, urllib.parse
 
-class TagField(models.TextField, metaclass=models.SubfieldBase):
+class TagField(models.TextField):
     description = "Stores tags in a single database column."
 
     def __init__(self, delimiter="|", *args, **kwargs):
@@ -25,7 +25,7 @@ class TagField(models.TextField, metaclass=models.SubfieldBase):
     def get_prep_value(self, value):
         return self.delimiter.join(value)
 
-class NumpyArrayField(models.TextField, metaclass=models.SubfieldBase):
+class NumpyArrayField(models.TextField):
     description = "Stores a Numpy ndarray."
 
     def __init__(self, *args, **kwargs):
@@ -49,7 +49,7 @@ class NumpyArrayField(models.TextField, metaclass=models.SubfieldBase):
         else:
             raise TypeError('%s is not a list or numpy array' % value)
 
-class DictField(models.TextField, metaclass=models.SubfieldBase):
+class DictField(models.TextField):
     description = "Stores a python dictionary"
 
     def __init__(self, *args, **kwargs):
@@ -77,7 +77,7 @@ class DictField(models.TextField, metaclass=models.SubfieldBase):
         value = self._get_val_from_obj(obj)
         return self.get_db_prep_value(value)
 
-class JSONField(models.TextField, metaclass=models.SubfieldBase):
+class JSONField(models.TextField):
     description = "Stores a python dictionary"
 
     def __init__(self, *args, **kwargs):
