@@ -1,3 +1,5 @@
+"""This is intended to test the python 3 functionality of the TRI fork of qmpy"""
+
 import unittest
 import os
 import tempfile

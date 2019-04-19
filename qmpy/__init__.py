@@ -4,6 +4,9 @@
 qmpy is a package containing many tools for computational materials science. 
 """
 # Load models (Django >= 1.7)
+from django.conf import settings
+settings.configure(debug=True)
+
 import django
 django.setup()
 

@@ -49,12 +49,12 @@ class Atom(models.Model):
         | volume: Volume occupied by the atom
 
     """
-    structure = models.ForeignKey('Structure', related_name='atom_set',
+    structure = models.ForeignKey('Structure', models.CASCADE, related_name='atom_set',
                                                null=True)
-    site = models.ForeignKey('Site', related_name='atom_set', null=True)
+    site = models.ForeignKey('Site', models.CASCADE, related_name='atom_set', null=True)
 
     # species
-    element = models.ForeignKey('Element', blank=True, null=True)
+    element = models.ForeignKey('Element', models.CASCADE, blank=True, null=True)
     ox = models.IntegerField(default=None, blank=True, null=True)
 
     # position
@@ -74,7 +74,7 @@ class Atom(models.Model):
 
     # symmetry
     occupancy = models.FloatField(default=1)
-    wyckoff = models.ForeignKey(WyckoffSite, blank=True, null=True)
+    wyckoff = models.ForeignKey(WyckoffSite, models.CASCADE, blank=True, null=True)
 
     dist = None
     copy_of = None
@@ -294,8 +294,8 @@ class Site(models.Model):
         | x, y, z: Coordinate of the Site
 
     """
-    structure = models.ForeignKey('Structure', blank=True, null=True)
-    wyckoff = models.ForeignKey(WyckoffSite, blank=True, null=True)
+    structure = models.ForeignKey('Structure', models.CASCADE, blank=True, null=True)
+    wyckoff = models.ForeignKey(WyckoffSite, models.CASCADE, blank=True, null=True)
     x = models.FloatField()
     y = models.FloatField()
     z = models.FloatField()
