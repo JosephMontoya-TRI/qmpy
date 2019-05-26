@@ -31,7 +31,7 @@ setup(
         "pexpect",
         "pyparsing",
         "PyYAML",
-        "scikit-learn",
+        "scikit-learn==0.20",
         "bokeh == 0.12.15"
     ],
 )
