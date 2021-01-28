@@ -957,7 +957,9 @@ class PhaseSpace(object):
         elif pulp.COIN_CMD().available():
             prob.solve(pulp.COIN_CMD())
         else:
-            prob.solve()
+            from pulp.apis import LpSolverDefault as lpsdef
+            lpsdef.msg = False
+            prob.solve(lpsdef)
 
         phase_comp = dict([ (p, phase_vars[p].varValue)
             for p in phases if phase_vars[p].varValue > 1e-5])
